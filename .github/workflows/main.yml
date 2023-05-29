@@ -23,7 +23,7 @@ jobs:
             build-base \
             ccache \
             git \
-            ncurses5-libs \
+            ncurses \
             libstdc++ \
             openjdk8-jre \
             unzip \
