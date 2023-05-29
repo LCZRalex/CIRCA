@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
 
     steps:
       - name: Check out repository
@@ -40,7 +40,6 @@ jobs:
             autoconf \
             autotools-dev
           sudo apt-get clean
-
 
       - name: Install Buildozer
         run: |
