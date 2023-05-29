@@ -9,42 +9,30 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    container:
+      image: artemklevtsov/r-alpine:latest
+      options: --privileged
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.8
-
       - name: Install dependencies
         run: |
-          sudo dpkg --add-architecture i386
-          sudo apt-get update -qq
-          sudo apt-get upgrade -y
-          sudo apt-get install -qq --yes --no-install-recommends \
-            build-essential \
+          apk add --no-cache \
+            build-base \
             ccache \
             git \
-            libncurses5:i386 \
-            libstdc++6:i386 \
-            lib32z1 \
-            libbz2-1.0:i386 \
-            openjdk-8-jdk \
+            ncurses5-libs \
+            libstdc++ \
+            openjdk8-jre \
             unzip \
-            zlib1g-dev \
-            zlib1g:i386 \
-            libltdl-dev \
+            zlib-dev \
+            libltdl \
             libffi-dev \
-            libssl-dev \
+            openssl-dev \
             autoconf \
-            autotools-dev
-          sudo apt-get clean
-
-
-      - name: Install Buildozer
-        run: |
+            automake
           pip install --upgrade cython==0.29.19
           pip install --upgrade buildozer
 
