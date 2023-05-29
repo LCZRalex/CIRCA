@@ -33,13 +33,12 @@ jobs:
             openssl-dev \
             autoconf \
             automake
+          apk add --no-cache py-pip
           pip install --upgrade cython==0.29.19
           pip install --upgrade buildozer
-
       - name: Build APK
         run: |
           buildozer android debug
-
       - name: Upload APK
         uses: actions/upload-artifact@v2
         with:
