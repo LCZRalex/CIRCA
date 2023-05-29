@@ -20,6 +20,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          sudo dpkg --add-architecture i386
           sudo apt-get update -qq
           sudo apt-get install -qq --yes --no-install-recommends \
             build-essential \
@@ -27,12 +28,9 @@ jobs:
             git \
             libncurses5:i386 \
             libstdc++6:i386 \
-            libgtk2.0-0:i386 \
-            libpangox-1.0-0:i386 \
-            libpangoxft-1.0-0:i386 \
-            libidn11:i386 \
-            python2.7 \
-            python2.7-dev \
+            lib32z1 \
+            lib32ncurses5 \
+            libbz2-1.0:i386 \
             openjdk-8-jdk \
             unzip \
             zlib1g-dev \
@@ -43,6 +41,7 @@ jobs:
             autoconf \
             autotools-dev
           sudo apt-get clean
+
 
       - name: Install Buildozer
         run: |
