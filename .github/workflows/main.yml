@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: artemklevtsov/r-alpine:latest
+      image: python:3.6-alpine
       options: --privileged
 
     steps:
