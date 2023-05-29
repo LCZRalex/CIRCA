@@ -38,7 +38,7 @@ jobs:
           pip install --upgrade cython==0.29.19
           pip install --upgrade buildozer
       - name: Build APK
-        working-directory: .github/workflows/buildozer.spec
+        working-directory: workflows
         run: |
           adduser -D buildozer
           su buildozer -c "buildozer android debug"
