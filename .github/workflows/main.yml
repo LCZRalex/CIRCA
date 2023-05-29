@@ -1,0 +1,60 @@
+name: Build APK
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -qq --yes --no-install-recommends \
+            build-essential \
+            ccache \
+            git \
+            libncurses5:i386 \
+            libstdc++6:i386 \
+            libgtk2.0-0:i386 \
+            libpangox-1.0-0:i386 \
+            libpangoxft-1.0-0:i386 \
+            libidn11:i386 \
+            python2.7 \
+            python2.7-dev \
+            openjdk-8-jdk \
+            unzip \
+            zlib1g-dev \
+            zlib1g:i386 \
+            libltdl-dev \
+            libffi-dev \
+            libssl-dev \
+            autoconf \
+            autotools-dev
+          sudo apt-get clean
+
+      - name: Install Buildozer
+        run: |
+          pip install --upgrade cython==0.29.19
+          pip install --upgrade buildozer
+
+      - name: Build APK
+        run: |
+          buildozer android debug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: apk
+          path: bin/*.apk
